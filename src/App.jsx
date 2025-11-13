@@ -20,10 +20,10 @@ function App() {
       </header>
       <main>
         <div className="container">
-          <div className="card p-4">
+          <div className="card p-4 bg-light shodow-lg">
             <div className="input-group mb-3">
               {/*author*/}
-              <span className="input-group-text" id="author">Name</span>
+              <span className="input-group-text bg-primary text-light" id="author">Name</span>
               <input
                 type="text"
                 className="form-control"
@@ -32,7 +32,7 @@ function App() {
                 onChange={(e) => setAuthor(e.target.value)} />
 
               {/*title*/}
-              <span className="input-group-text" id="title">Title</span>
+              <span className="input-group-text bg-primary text-light" id="title">Title</span>
               <input
                 type="text"
                 className="form-control"
@@ -42,7 +42,7 @@ function App() {
             </div>
             <div className="input-group mb-3">
               {/*message*/}
-              <span className="input-group-text" id='body'>Message</span>
+              <span className="input-group-text bg-primary text-light" id='body'>Message</span>
               <textarea
                 className="form-control"
                 value={message}

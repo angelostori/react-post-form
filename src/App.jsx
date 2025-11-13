@@ -2,14 +2,13 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function App() {
-  const [author, setAuthor] = useState('')
-  const [title, setTitle] = useState('')
-  const [message, setMessage] = useState('')
-  const [isPublic, setIsPublic] = useState(false)
 
-  const handleCheckboxChange = () => {
-    setIsPublic(!isPublic)
-  }
+  const [formData, setFormData] = useState({
+    author: '',
+    title: '',
+    message: '',
+    isPublic: true
+  })
 
   return (
     <>
@@ -23,30 +22,33 @@ function App() {
           <div className="card p-4 bg-light shodow-lg">
             <div className="input-group mb-3">
               {/*author*/}
-              <span className="input-group-text bg-primary text-light" id="author">Name</span>
+              <span className="input-group-text bg-primary text-light">Name</span>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Username"
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)} />
+                name='author'
+                value={formData.author}
+                onChange={(e) => setFormData({ ...formData, author: e.target.value })} />
 
               {/*title*/}
-              <span className="input-group-text bg-primary text-light" id="title">Title</span>
+              <span className="input-group-text bg-primary text-light">Title</span>
               <input
                 type="text"
                 className="form-control"
                 placeholder="Choose a title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)} />
+                name='title'
+                value={formData.title}
+                onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
             </div>
             <div className="input-group mb-3">
               {/*message*/}
-              <span className="input-group-text bg-primary text-light" id='body'>Message</span>
+              <span className="input-group-text bg-primary text-light">Message</span>
               <textarea
                 className="form-control"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}></textarea>
+                name='message'
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}></textarea>
             </div>
 
             <div className="form-check">
@@ -54,9 +56,10 @@ function App() {
               <input
                 className="form-check-input"
                 type="checkbox"
-                checked={isPublic}
+                checked={formData.isPublic}
                 id="public"
-                onChange={handleCheckboxChange} />
+                name='isPublic'
+                onChange={(e) => setFormData({ ...formData, isPublic: e.target.checked })} />
 
               <label className="form-check-label" htmlFor="public">
                 Public message

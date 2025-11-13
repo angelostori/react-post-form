@@ -22,31 +22,41 @@ function App() {
   }
 
   function handleSubmit(e) {
+    e.preventDefault()
 
     if (!formData.author || !formData.title || !formData.body) {
       setMessage('Compila tutti i campi prima di inviare!')
       return
     }
 
-    e.preventDefault()
-    console.log('Dati inviati:', formData)
+    if (formData.public) {
 
-    axios.post(endpoint, formData, {
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(response => {
-        console.log('Risposta dal server:', response)
-        if (response.status === 201) {
-          setMessage('Post inviato con successo!')
-        } else {
-          setMessage('Qualcosa è andato storto, riprova.')
-        }
-        setFormData(initialFormData)
+      axios.post(endpoint, formData, {
+        headers: { 'Content-Type': 'application/json' }
       })
-      .catch(err => {
-        console.error('Errore:', err.message)
-        setMessage('Errore durante l\'invio del post.')
-      })
+        .then(response => {
+          console.log('Risposta dal server:', response)
+
+          if (response.status === 201) {
+            setMessage('Post inviato con successo!')
+          } else {
+            setMessage('Qualcosa è andato storto, riprova.')
+          }
+          setFormData(initialFormData)
+        })
+        .catch(err => {
+          console.error('Errore:', err.message)
+          setMessage('Errore durante l\'invio del post.')
+        })
+
+    } else {
+      console.log('Post NON pubblico:', formData)
+      setMessage('Post salvato solo in console (non pubblico)')
+      setFormData(initialFormData)
+    }
+
+
+
   }
 
   return (

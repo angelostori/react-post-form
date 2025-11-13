@@ -2,7 +2,14 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [author, setAuthor] = useState('')
+  const [title, setTitle] = useState('')
+  const [message, setMessage] = useState('')
+  const [isPublic, setIsPublic] = useState(false)
+
+  const handleCheckboxChange = () => {
+    setIsPublic(!isPublic)
+  }
 
   return (
     <>
@@ -14,21 +21,44 @@ function App() {
       <main>
         <div className="container">
           <div className="card p-4">
-            <div class="input-group mb-3">
-              <span class="input-group-text" id="author">Name</span>
-              <input type="text" class="form-control" placeholder="Username" />
+            <div className="input-group mb-3">
+              {/*author*/}
+              <span className="input-group-text" id="author">Name</span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Username"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)} />
 
-              <span class="input-group-text" id="title">Title</span>
-              <input type="text" class="form-control" placeholder="Choose a title" />
+              {/*title*/}
+              <span className="input-group-text" id="title">Title</span>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Choose a title"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)} />
             </div>
-            <div class="input-group mb-3">
-              <span class="input-group-text" id='body'>Message</span>
-              <textarea class="form-control"></textarea>
+            <div className="input-group mb-3">
+              {/*message*/}
+              <span className="input-group-text" id='body'>Message</span>
+              <textarea
+                className="form-control"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}></textarea>
             </div>
 
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="public" checked />
-              <label class="form-check-label" forHtml="public">
+            <div className="form-check">
+              {/*public*/}
+              <input
+                className="form-check-input"
+                type="checkbox"
+                checked={isPublic}
+                id="public"
+                onChange={handleCheckboxChange} />
+
+              <label className="form-check-label" htmlFor="public">
                 Public message
               </label>
             </div>

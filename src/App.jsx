@@ -10,6 +10,12 @@ function App() {
     isPublic: true
   })
 
+  function handleChgange() {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    setFormData({ ...formData, [e.target.name]: value })
+  }
+
   return (
     <>
       <header>
@@ -29,7 +35,7 @@ function App() {
                 placeholder="Username"
                 name='author'
                 value={formData.author}
-                onChange={(e) => setFormData({ ...formData, author: e.target.value })} />
+                onChange={handleChgange} />
 
               {/*title*/}
               <span className="input-group-text bg-primary text-light">Title</span>
@@ -39,7 +45,7 @@ function App() {
                 placeholder="Choose a title"
                 name='title'
                 value={formData.title}
-                onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
+                onChange={handleChgange} />
             </div>
             <div className="input-group mb-3">
               {/*message*/}
@@ -48,7 +54,7 @@ function App() {
                 className="form-control"
                 name='message'
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}></textarea>
+                onChange={handleChgange}></textarea>
             </div>
 
             <div className="form-check">
@@ -59,7 +65,7 @@ function App() {
                 checked={formData.isPublic}
                 id="public"
                 name='isPublic'
-                onChange={(e) => setFormData({ ...formData, isPublic: e.target.checked })} />
+                onChange={handleChgange} />
 
               <label className="form-check-label" htmlFor="public">
                 Public message

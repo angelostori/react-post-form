@@ -22,6 +22,12 @@ function App() {
   }
 
   function handleSubmit(e) {
+
+    if (!formData.author || !formData.title || !formData.body) {
+      setMessage('Compila tutti i campi prima di inviare!')
+      return
+    }
+
     e.preventDefault()
     console.log('Dati inviati:', formData)
 
